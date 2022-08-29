@@ -1,0 +1,73 @@
+# задание 1
+def s_calc():
+    a = input("Укажите делимое число: ")
+    b = input("Укажите делитель: ")
+    res = а / b
+    return res
+    s_val = s_calc()
+    if b > 0:
+        print(s_val)
+    else:
+        print(s_val("на нуль делить нельзя"))
+       
+# задание 2
+def person_data(**kwargs):
+    return kwargs
+
+
+print(person_data(name="Kotov", surname="Kot", year_of_birth=1997, city_of_residence="Testovo", email="Kotkot@test.ru",
+                  phone=999999999))
+    
+# задание 3
+def my_func(a, b, c):
+    if (a + b) > (a + c) and (a + b) > (b + c):
+        return a + b
+    if (a + c) > (a + b) and (a + c) > (b + c):
+        return a + c
+    if (b + c) > (a + b) and (b + c) > (a + c):
+        return b + c
+
+
+try:
+    n1 = int(input("a = "))
+    n2 = int(input("b = "))
+    n3 = int(input("c = "))
+    print(f"The sum of the two maximum numbers:  {my_func(n1, n2, n3)}")
+except ValueError as e:
+    print(f"{e}")
+    
+# задание 4
+def number(x, y):
+    return 1 / x ** abs(y)
+
+
+def number_2():
+    print(number(2, -2))
+
+
+def number_3(x, y):
+    for i in range(abs(y - 1)):
+        x *= x
+    return 1 / x
+
+
+def number_3():
+    print(number(2, -2))
+
+# Задание 5
+def number_5():
+    res = 0
+    while True:
+        numbers = input('Enter list of number or * to exit: ').split()
+        for i in numbers:
+            try:
+                if i == '*':
+                    print(f'Sum is {res}. Exit')
+                    return
+                else:
+                    res += int(i)
+            except ValueError:
+                print('Enter number or *')
+        print(f'Sum is {res}')
+
+
