@@ -1,0 +1,52 @@
+# ДЗ №1
+from sys import argy
+
+script_name, cost_per_hour, number_of_hours_worked = sys.argv
+print("Имя скрипта: ", script_name)
+print("Стоимость часа: ", cost_per_hour)
+print("Количество отработанных часов: ", number_of_hours_worked)
+print("Заработная плата: ", number_of_hours_worked * cost_per_hour)
+print("Премия: ", bonus_salary
+if number_of_hours_worked > 40
+else cost_per_hour * 0, 5)
+print("Заработная плата с премией: ", int(number_of_hours_worked) * int(cost_per_hour) + int(bonus_salary))
+
+# ДЗ №2
+my_list = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+print(my_list)
+new_list = [el for el in my_list if el > my_list[el - 1]]
+print(new_list)
+
+# ДЗ №3
+my_set = [el for el in range(20, 240) if el % 20 == 0 or el % 21 == 0]
+print(my_set)
+
+№ ДЗ №4
+numbers = [2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11, 76, 56]
+unique_numbers = list(set(numbers))
+print(unique_numbers)
+
+№ДЗ №5
+from functools import reduce
+my_set = [i for i in range(100, 1001, 2)]
+print("\n", reduce(lambda x,y: x*y, my_set))
+
+№ДЗ №6
+from itertools import count
+for i in count(3):
+    if i > 11:
+        break
+    else:
+        print(i)
+
+from itertools import cycle
+c = 0
+for el in cycle("345"):
+    if c > 5:
+        break
+    print(el)
+    c += 1
+    
+  № ДЗ №7 не получилось решить, т.к. дальше 
+  "def generator(): for el in mylist:" пройти не удалось
+  
