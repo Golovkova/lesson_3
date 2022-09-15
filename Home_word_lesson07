@@ -1,0 +1,155 @@
+#ДЗ_№1
+class Matrix:
+    value: list
+
+    def __init__(self, value: list):
+        self.value = value
+
+    def __add__(self, other: 'Matrix'):
+        try:
+            lines_count = len(self.value)
+            items_count = len(self.value[0])
+
+            new_value = [
+                [
+                    self.value[line][idx] + other.value[line][idx]
+                    for idx in range(items_count)
+                ]
+                for line in range(lines_count)
+            ]
+
+            return Matrix(new_value)
+        except IndexError:
+            print("Разные матрицы")
+            exit(1)
+
+    def __str__(self):
+        return "\n".join(
+            str(row).strip('[]').replace(',', '')
+            for row in self.value
+        )
+
+
+m1 = Matrix([
+    [1, 2, 3],
+    [4, 5, 6],
+    [6, 7, 8],
+])
+
+m2 = Matrix([
+    [9, 10, 11],
+    [12, 13, 14],
+    [15, 16, 17],
+])
+
+м = m1 + m2
+
+print(м)
+
+#ДЗ_№2
+
+from abc import ABC, abstractmethod
+
+
+class Clothes(ABC):
+    name: str
+
+    def __init__(self, name: str):
+        self.name = name
+
+    @property
+    @abstractmethod
+    def calculate(self) -> float:
+        pass
+
+
+class Coat(Clothes):
+    _size: float
+
+    def __init__(self, name: str, size: float):
+        super().__init__(name)
+        self._size = size
+
+    @property
+    def calculate(self) -> float:
+        return self._size / 6.5 + 0.5
+
+
+class Suit(Clothes):
+    _height: float
+
+    def __init__(self, name: str, height: float):
+        super().__init__(name)
+        self._height = height
+
+    @property
+    def calculate(self) -> float:
+        return 2 * self._height + 0.3
+
+
+coat = Coat('Пальто', 2)
+print(coat.calculate)
+
+suit = Suit('Костюм', 2)
+print(suit.calculate)
+
+#ДЗ_№3
+class Organic_Cell:
+    __count: int
+
+    def __init__(self, count: int):
+        assert count > 0, "Количество ячеек должно быть больше нуля"
+        self.__count = count
+
+    def __add__(self, other: 'Organic_Cell'):
+        self.validate_item(other)
+        value = self.count + other.count
+        return Organic_Cell(value)
+
+    def __sub__(self, other: 'Organic_Cell'):
+        self.validate_item(other)
+        value = self.count - other.count
+        assert value > 0, "Разность ячеек меньше 0"
+        return Organic_Cell(value)
+
+    def __mul__(self, other: 'Organic_Cell'):
+        self.validate_item(other)
+        value = self.count * other.count
+        return Organic_Cell(value)
+
+    def __truediv__(self, other: 'Organic_Cell'):
+        self.validate_item(other)
+        value = round(self.count / self.count)
+        return Organic_Cell(value)
+
+    def __str__(self):
+        return str(self.__count)
+
+    def validate_item(self, other):
+        assert isinstance(other, self.__class__), "Операции могут проиводиться между клетками"
+
+    @property
+    def count(self) -> int:
+        return self.__count
+
+    @staticmethod
+    def make_order(cell_object: 'Organic_Cell', count_per_row: int) -> str:
+        items = '*' * cell_object.count
+        chunks = [
+            items[idx:idx + count_per_row]
+            for idx in range(0, len(items), count_per_row)
+        ]
+
+        return '\n'.join(chunks)
+
+
+first = Organic_Cell(4)
+second = Organic_Cell(3)
+huge = Organic_Cell(5)
+
+print(first + second) 
+print(first - second)  
+print(first * second)  
+print(first / second)  
+
+print(Organic_Cell.make_order(huge, 5))
