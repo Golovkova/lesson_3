@@ -1,0 +1,80 @@
+#ДЗ_№1
+class Date:
+    day: int
+    month: int
+    year: int
+
+    def __init__(self, date_string: str):
+        numbers = Date.extract_numbers(date_string)
+        self.validate_numbers(numbers)
+
+        self.day, self.month, self.year = numbers
+
+    @classmethod
+    def extract_numbers(cls, date_string: str) -> list:
+        return [int(x) for x in date_string.split('-')]
+
+    @staticmethod
+    def validate_numbers(numbers: list):
+        d, m, y = numbers
+
+        assert 1 <= d <= 31, "Необходимо вводить данные от 1 до 31"
+        assert 1 <= m <= 12, "Необходимо вводить данные от 1 до 12"
+        assert 1920 <= y <= 2220, "Необходимо вводить данные с 1920 по 2220"
+
+
+my_date = Date('30-01-2021')
+
+#ДЗ_№2
+class CustomZeroDivisionError(Exception):
+    pass
+
+
+def get_numerator() -> int:
+    return int(input("Введите числитель >>> "))
+
+
+def get_denominator() -> int:
+    value = int(input("Введите знаменатель >>> "))
+
+    if value == 0:
+        raise CustomZeroDivisionError
+
+    return value
+
+
+while True:
+    try:
+        numerator = get_numerator()
+        denominator = get_denominator()
+
+        print(f"Результат = {numerator / denominator}")
+    except CustomZeroDivisionError:
+        print("делить на нуль нельзя")
+    except KeyboardInterrupt:
+        break
+
+#ДЗ_№3
+class NonNumberListValueException(Exception):
+    pass
+
+
+def append_number(number_list: list):
+    value = input("Введите число >>> ")
+
+    try:
+        number_list.append(float(value))
+    except ValueError:
+        raise NonNumberListValueException(f"Вы ввели '{value}' вместо числа")
+
+
+numbers = []
+
+while True:
+    try:
+        append_number(numbers)
+    except NonNumberListValueException as exception:
+        print(exception)
+    except KeyboardInterrupt:
+        print(f"\nСписок чисел = {numbers}")
+        break
